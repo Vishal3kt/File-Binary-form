@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.outer-wrapper {
+  max-width: 1920px;
+  width: 100%;
+  padding: 0 24px;
+  display: flex;
+  justify-content: center;
+
+  .middle-wrapper {
+    max-width: 1440px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .wrapper {
+      max-width: 1280px;
+      width: 100%;
+    }
+  }
+}
+
+@function rem($pixels) {
+  $rem: calc($pixels / 16);
+  @return $rem + rem;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

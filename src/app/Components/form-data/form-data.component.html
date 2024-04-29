@@ -1,0 +1,20 @@
+<div class="wrapper">
+    <form [formGroup]="form" class="example-form" (ngSubmit)="saveData()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name" placeholder="Enter your name...">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" placeholder="Enter your Email...">
+
+        <label for="city">City:</label>
+        <input type="text" id="city" formControlName="city" placeholder="Enter your City...">
+
+        <input (change)="addFile($event)" type="file" name="fileInput" formControlName="resume"
+            style="margin-bottom: 10px;">
+
+        <div class="btn-wrapper">
+            <button type="submit">Save</button>
+            <button routerLink="/table">Back</button>
+        </div>
+    </form>
+</div>
