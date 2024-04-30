@@ -1,20 +1,26 @@
 <div class="wrapper">
-    <form [formGroup]="form" class="example-form" (ngSubmit)="saveData()">
-        <label for="name">Name:</label>
-        <input type="text" id="name" formControlName="name" placeholder="Enter your name...">
+    <form [formGroup]="form" class="example-form" (ngSubmit)="saveData()" fxLayout="column" fxLayoutGap="10px">
+        <mat-form-field apperance="outline">
+            <mat-label>Name:</mat-label>
+            <input matInput type="text" formControlName="name" placeholder="Enter your name...">
+        </mat-form-field>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" formControlName="email" placeholder="Enter your Email...">
+        <mat-form-field>
+            <mat-label>Email:</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="Enter your Email...">
+        </mat-form-field>
 
-        <label for="city">City:</label>
-        <input type="text" id="city" formControlName="city" placeholder="Enter your City...">
+        <mat-form-field>
+            <mat-label>City:</mat-label>
+            <input matInput type="text" formControlName="city" placeholder="Enter your City...">
+        </mat-form-field>
 
         <input (change)="addFile($event)" type="file" name="fileInput" formControlName="resume"
             style="margin-bottom: 10px;">
 
         <div class="btn-wrapper">
-            <button type="submit">Save</button>
-            <button routerLink="/table">Back</button>
+            <button [disabled]="form.invalid" mat-raised-button type="submit">Save</button>
+            <button style="background: #C6D3F0;" mat-raised-button routerLink="/table">Back</button>
         </div>
     </form>
 </div>
