@@ -6,7 +6,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
-
 @Component({
   selector: 'app-table-data',
   templateUrl: './table-data.component.html',
@@ -49,6 +48,19 @@ export class TableDataComponent implements OnInit, AfterViewInit {
       console.error('Error fetching data:', error);
     })
   }
+
+  removeRow(id: string) {
+    this.api.deleteRow(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.dataSource.data = this.dataSource.data.filter((row: any) => row.id !== id);
+      },
+      (error) => {
+        console.error('Error deleting row:', error);
+      }
+    );
+  }
+
 
   toggle() {
     this.router.navigate(['/form']);

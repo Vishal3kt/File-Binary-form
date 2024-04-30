@@ -24,6 +24,10 @@ export class ApiService {
     );
   }
 
+  deleteRow(id: string) {
+    return this.http.delete<any>(`${this.baseUrl}/${id}`);
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);

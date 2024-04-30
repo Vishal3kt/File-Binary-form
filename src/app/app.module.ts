@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon'
+
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { MatTableModule } from '@angular/material/table';
     MatPaginator,
     MatPaginatorModule,
     MatSort,
-    MatSortModule
+    MatSortModule,
+    MatIconModule
   ],
   providers: [
     provideAnimationsAsync()

@@ -18,4 +18,13 @@
   mat-form-field {
     width: 20%;
   }
+
+  .icon-btn-wrapper {
+    display: flex;
+    gap: 12px;
+  }
+}
+
+.mat-icon {
+  margin: 0 !important;
 }
