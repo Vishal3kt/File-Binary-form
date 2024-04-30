@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { DailogDeleteComponent } from '../dailog-delete/dailog-delete.component';
 
 @Component({
   selector: 'app-table-data',
@@ -19,7 +21,7 @@ export class TableDataComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private api: ApiService, private sanitizer: DomSanitizer, private router: Router) { }
+  constructor(private api: ApiService, private sanitizer: DomSanitizer, private router: Router, private dailog: MatDialog) { }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>();
@@ -29,6 +31,24 @@ export class TableDataComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  openDialog(rowId: string): void {
+    if (!rowId) {
+      return;
+    }
+    const dialogRef = this.dailog.open(DailogDeleteComponent, {
+      width: '350px',
+      data: { rowId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.removeRow(rowId);
+      } else {
+        console.log('Not deleted.');
+      }
+    });
   }
 
   applyFilter(event: Event) {
@@ -59,6 +79,10 @@ export class TableDataComponent implements OnInit, AfterViewInit {
         console.error('Error deleting row:', error);
       }
     );
+  }
+
+  editRow(row: any) {
+    this.router.navigate(['/form'], { state: { row } });
   }
 
 

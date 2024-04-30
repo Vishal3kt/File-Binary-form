@@ -17,13 +17,15 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon'
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { DailogDeleteComponent } from './Components/dailog-delete/dailog-delete.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormDataComponent,
-    TableDataComponent
+    TableDataComponent,
+    DailogDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { MatIconModule } from '@angular/material/icon'
     MatPaginatorModule,
     MatSort,
     MatSortModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [
     provideAnimationsAsync()

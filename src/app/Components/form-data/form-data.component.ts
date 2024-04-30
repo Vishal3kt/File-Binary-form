@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../api.service';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-form-data',
@@ -12,6 +11,8 @@ import { catchError } from 'rxjs/operators';
 export class FormDataComponent implements OnInit {
   form: FormGroup;
   resume: any;
+  updateMode: boolean = false;
+  editingRowId: any;
 
   constructor(private fb: FormBuilder, private api: ApiService, private router: Router) { }
 
@@ -30,6 +31,25 @@ export class FormDataComponent implements OnInit {
 
   addFile(e: any) {
     this.resume = e.target.files[0];
+  }
+
+  resetForm() {
+    this.form.reset();
+    this.updateMode = false;
+    this.editingRowId = null;
+  }
+
+  editRow(row: any) {
+    this.form.patchValue({
+      name: row.name,
+      email: row.email,
+      city: row.city,
+      resume: row.resume
+    });
+
+    this.updateMode = true;
+    this.editingRowId = row.id;
+    window.scrollTo(0, 0);
   }
 
   saveData(): void {

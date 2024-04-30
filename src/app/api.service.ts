@@ -28,6 +28,12 @@ export class ApiService {
     return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }
 
+  editRow(data: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/${data.id}`, data).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
