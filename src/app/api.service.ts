@@ -24,6 +24,10 @@ export class ApiService {
     );
   }
 
+  getFile(id: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${id}/file`);
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);

@@ -50,12 +50,16 @@ export class TableDataComponent implements OnInit, AfterViewInit {
     })
   }
 
-  toggle() {
-    this.router.navigate(['/form']);
+  downloadFile(id: string) {
+    this.api.getFile(id).subscribe(() => {
+      console.log('File downloaded successfully.');
+    }, (error) => {
+      console.error('Error downloading file:', error);
+    });
   }
 
-  getDownloadUrl() {
-
+  toggle() {
+    this.router.navigate(['/form']);
   }
 
 }
