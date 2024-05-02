@@ -1,5 +1,6 @@
 <div class="wrapper">
-    <form [formGroup]="form" class="example-form" (ngSubmit)="saveData()" fxLayout="column" fxLayoutGap="10px">
+    <form [formGroup]="form" class="example-form" (ngSubmit)="saveData()" fxLayout="column" fxLayoutGap="10px"
+        id="myForm">
         <mat-form-field apperance="outline">
             <mat-label>Name:</mat-label>
             <input matInput type="text" formControlName="name" placeholder="Enter your name...">
@@ -19,7 +20,7 @@
             style="margin-bottom: 10px;">
 
         <div class="btn-wrapper">
-            <button [disabled]="form.invalid" mat-raised-button type="submit">Save</button>
+            <button [disabled]="form.invalid" mat-raised-button type="submit" form="myForm">Save</button>
             <button style="background: #C6D3F0;" mat-raised-button routerLink="/table">Back</button>
         </div>
     </form>

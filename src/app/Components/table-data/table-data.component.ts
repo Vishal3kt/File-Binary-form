@@ -63,6 +63,7 @@ export class TableDataComponent implements OnInit, AfterViewInit {
   fetchData() {
     this.api.getData().subscribe((res: any) => {
       this.dataSource.data = res;
+      console.log(res);
       console.log(this.data);
     }, (error: any) => {
       console.error('Error fetching data:', error);
