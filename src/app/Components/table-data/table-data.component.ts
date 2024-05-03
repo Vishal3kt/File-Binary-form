@@ -27,10 +27,6 @@ export class TableDataComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>();
     this.fetchData();
-    if (this.png === 'png' || this.png === 'jpg') {
-      console.log('hiop');
-    }
-    this.fetchPaginationData(1, 2);
   }
 
   ngAfterViewInit() {
@@ -65,20 +61,28 @@ export class TableDataComponent implements OnInit, AfterViewInit {
     }
   }
 
-  fetchPaginationData(pageNumber: number, pageSize: number) {
-    this.api.getPaginationData(pageNumber, pageSize).subscribe((res) => {
-      console.log(res);
-    })
-  }
-
   fetchData() {
     this.api.getData().subscribe((res: any) => {
       this.dataSource.data = res;
       console.log(res);
+      // this.fetchPaginationData(1, 5);
+      console.log(this.fetchPaginationData(1, 5));
       // console.log(this.data);
     }, (error: any) => {
       console.error('Error fetching data:', error);
     })
+  }
+
+  fetchPaginationData(pageNumber: number, pageSize: number) {
+    this.api.getPaginationData(pageNumber, pageSize).subscribe(
+      (res: any) => {
+        this.dataSource.data = res.content;
+        this.dataSource.paginator = this.paginator;
+      },
+      (error: any) => {
+        console.error('Error fetching pagination data:', error);
+      }
+    );
   }
 
   removeRow(id: string) {
