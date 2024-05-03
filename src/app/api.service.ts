@@ -9,13 +9,16 @@ import { catchError } from 'rxjs/operators';
 export class ApiService {
 
   baseUrl: string = 'http://localhost:8080/employee';
+  // http://localhost:8080/employee?pageNumber=1&pageSize=5
 
   constructor(private http: HttpClient) { }
 
   getData(): Observable<any> {
-    return this.http.get<any>(this.baseUrl).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.get<any>(this.baseUrl)
+  }
+
+  getPaginationData(pageNumber: number, pageSize: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}?pageNumber=${pageNumber}&pageSize=${pageSize}`)
   }
 
   addData(data: any): Observable<any> {

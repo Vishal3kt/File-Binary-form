@@ -17,6 +17,7 @@ export class TableDataComponent implements OnInit, AfterViewInit {
   data: any;
   displayedColumns: string[] = ['id', 'name', 'email', 'file', 'action'];
   dataSource: MatTableDataSource<any>;
+  png: any = 'jpg';
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,6 +27,10 @@ export class TableDataComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<any>();
     this.fetchData();
+    if (this.png === 'png' || this.png === 'jpg') {
+      console.log('hiop');
+    }
+    this.fetchPaginationData(1, 2);
   }
 
   ngAfterViewInit() {
@@ -60,11 +65,17 @@ export class TableDataComponent implements OnInit, AfterViewInit {
     }
   }
 
+  fetchPaginationData(pageNumber: number, pageSize: number) {
+    this.api.getPaginationData(pageNumber, pageSize).subscribe((res) => {
+      console.log(res);
+    })
+  }
+
   fetchData() {
     this.api.getData().subscribe((res: any) => {
       this.dataSource.data = res;
       console.log(res);
-      console.log(this.data);
+      // console.log(this.data);
     }, (error: any) => {
       console.error('Error fetching data:', error);
     })

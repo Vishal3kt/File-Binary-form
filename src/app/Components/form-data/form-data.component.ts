@@ -53,28 +53,38 @@ export class FormDataComponent implements OnInit {
   }
 
   saveData(): void {
-    const payload = {
-      name: this.form.value.name,
-      email: this.form.value.email,
-      city: this.form.value.city,
-      resume: this.resume
-    };
-    const formData = new FormData;
+    if (this.form.valid) {
+      const payload = {
+        name: this.form.value.name,
+        email: this.form.value.email,
+        city: this.form.value.city,
+        resume: this.resume
+      };
+      const formData = new FormData();
+      formData.append('name', payload.name);
+      formData.append('email', payload.email);
+      formData.append('city', payload.city);
+      formData.append('resume', payload.resume);
 
-    formData.append('name', payload.name);
-    formData.append('email', payload.email);
-    formData.append('city', payload.city);
-    formData.append('resume', payload.resume)
-
-    if (payload) {
       this.api.addData(formData).subscribe(
         (response) => {
           console.log('Data added successfully:', response);
           this.router.navigate(['/table']);
+        },
+        (error) => {
+          console.error('Error adding data:', error);
+          if (error.status === 0) {
+            console.error('Connection Refused: Unable to connect to the backend server.');
+          } else {
+            console.error('Something bad happened; please try again later.');
+          }
         }
       );
     } else {
       console.log('Form is invalid');
+      Object.values(this.form.controls).forEach(control => {
+        control.markAsTouched();
+      });
     }
   }
 }

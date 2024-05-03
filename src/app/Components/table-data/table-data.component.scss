@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   padding: 32px;
-  width: 90%;
+  width: 100%;
   justify-content: center;
   text-align: center;
 
@@ -22,6 +22,8 @@
   .icon-btn-wrapper {
     display: flex;
     gap: 12px;
+    align-items: center;
+    justify-content: center;
   }
 }
 
